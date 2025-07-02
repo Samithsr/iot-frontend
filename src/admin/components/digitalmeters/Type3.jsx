@@ -12,8 +12,8 @@ const Type3 = ({
   const [value, setValue] = useState(50);
 
   useEffect(() => {
-    const socket = io("http://13.127.36.85:4000", {
-      path: "/socket.io/",
+    const socket = io("http://3.111.87.2:4000", {
+      // path: "/socket.io/",
       transports: ["websocket"],
       secure: true,
       reconnection: true,
