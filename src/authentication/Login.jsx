@@ -91,25 +91,27 @@ const Login = () => {
     }
   }
 const handleSubmit = async () => {
-    if (data?.password?.length < 8) {
-      setError({
-        ...error,
-        password: "Password must be at least 8 characters.",
-      });
-    } else {
-      try {
-        const res = await axios.post(`http://3.111.87.2:5000/api/v1/auth/${role}/login`, data);
-        localStorage.setItem("token", res?.data?.token);
-        {
-          role === "admin"
-            ? (window.location = "/dashboard/dashboard")
-            : (window.location = "/allusers/dashboard");
-        }
-      } catch (error) {
-        setLoginError(error?.response?.data?.error);
+  if (data?.password?.length < 8) {
+    setError({
+      ...error,
+      password: "Password must be at least 8 characters.",
+    });
+  } else {
+    try {
+      const res = await apiClient.post(`/auth/${role}/login`, data); // Use apiClient
+      localStorage.setItem("token", res?.data?.token);
+      dispatch(setUserDetails(res?.data)); // Store user details in Redux
+      {
+        role === "admin"
+          ? (window.location = "/dashboard/dashboard")
+          : (window.location = "/allusers/dashboard");
       }
+    } catch (error) {
+      setLoginError(error?.response?.data?.error || "Login failed");
     }
-  };
+  }
+};
+
   return (
     <div className="row" id="login">
       <LoginLeft />
