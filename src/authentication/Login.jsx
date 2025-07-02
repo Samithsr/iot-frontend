@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../redux/slices/UserDetailsSlice";
 import apiClient from "../api/apiClient";
+import axios from "axios";
 
 const Login = () => {
   const [count, setCount] = useState(1);
@@ -96,7 +97,7 @@ const Login = () => {
       });
     } else {
       try {
-        const res = await apiClient.post(`/auth/${role}/login`, data);
+        const res = await axios.post(`http://3.111.87.2:5000/api/v1/auth/${role}/login`, data);
         localStorage.setItem("token", res?.data?.token);
         {
           role === "admin"
