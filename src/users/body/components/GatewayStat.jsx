@@ -196,7 +196,7 @@ const GatewayStat = () => {
     initializeGatewayData();
 
     // Set up socket.io connection
-    const socket = io('http://3.111.87.2:4000', {
+    const socket = io('http://65.0.55.1:4000', {
       // path: '/socket.io/',
       transports: ['websocket'],
       secure: true,
